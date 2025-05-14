@@ -204,4 +204,82 @@ erDiagram
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🧪 Testing
+
+### Backend Tests (Go)
+
+The backend uses Go's built-in testing framework. Tests are located next to the code they test with `_test.go` suffix.
+
+```bash
+# Run all backend tests
+cd backend
+go test ./...
+
+# Run specific package tests with coverage
+go test ./internal/auth -cover
+go test ./internal/event -cover
+
+# Run tests with verbose output
+go test -v ./...
+```
+
+Key test locations:
+- `internal/auth/auth_test.go`: Authentication tests
+- `internal/event/event_test.go`: Event management tests
+- `internal/booking/booking_test.go`: Booking tests
+- `internal/tag/tag_test.go`: Tag management tests
+
+### Frontend Tests (React)
+
+The frontend uses Vitest and React Testing Library for unit testing.
+
+```bash
+# Run all frontend tests
+cd frontend
+npm test
+
+# Run tests in watch mode
+npm test -- --watch
+
+# Run tests with coverage
+npm test -- --coverage
+```
+
+Key test locations:
+- `src/components/__tests__/`: Component tests
+- `src/hooks/__tests__/`: Custom hooks tests
+- `src/services/__tests__/`: API service tests
+
+### Integration Tests
+
+Integration tests ensure different parts of the application work together correctly.
+
+```bash
+# Run integration tests
+cd backend
+go test ./integration/...
+```
+
+### E2E Tests
+
+End-to-end tests use Cypress to test the full application flow.
+
+```bash
+# Open Cypress test runner
+cd frontend
+npm run cypress:open
+
+# Run Cypress tests headlessly
+npm run cypress:run
+```
+
+### Test Coverage Goals
+
+- Backend: Minimum 80% coverage
+- Frontend: Minimum 70% coverage
+- Critical paths: 100% coverage
+  - Authentication flow
+  - Event creation and management
+  - Booking process 
