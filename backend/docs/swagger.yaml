@@ -1,0 +1,525 @@
+basePath: /api
+definitions:
+  models.AuthResponse:
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  models.BookingResponse:
+    properties:
+      createdAt:
+        type: string
+      event:
+        $ref: '#/definitions/models.Event'
+      eventId:
+        type: string
+      id:
+        type: string
+      userId:
+        type: string
+    type: object
+  models.CreateBookingRequest:
+    properties:
+      eventId:
+        type: string
+    required:
+    - eventId
+    type: object
+  models.CreateEventRequest:
+    properties:
+      category:
+        type: string
+      date:
+        example: "2024-03-20T15:00:00Z"
+        format: date-time
+        type: string
+      description:
+        type: string
+      image:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      price:
+        minimum: 0
+        type: number
+      tagIds:
+        items:
+          type: string
+        type: array
+    required:
+    - category
+    - date
+    - description
+    - image
+    - location
+    - name
+    - price
+    type: object
+  models.CreateTagRequest:
+    properties:
+      name:
+        example: conference
+        type: string
+    required:
+    - name
+    type: object
+  models.Event:
+    properties:
+      category:
+        type: string
+      createdAt:
+        example: "2024-03-20T10:00:00Z"
+        format: date-time
+        type: string
+      date:
+        example: "2024-03-20T15:00:00Z"
+        format: date-time
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      image:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      tags:
+        items:
+          $ref: '#/definitions/models.Tag'
+        type: array
+      updatedAt:
+        example: "2024-03-20T10:00:00Z"
+        format: date-time
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.RegisterRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+      username:
+        minLength: 3
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  models.SuccessResponse:
+    properties:
+      message:
+        example: operation successful
+        type: string
+    type: object
+  models.Tag:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.User:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      role:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+  upload.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  upload.UploadResponse:
+    properties:
+      imageUrl:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@example.com
+    name: API Support
+  description: A REST API for an event booking system
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Event Booking API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AuthResponse'
+      summary: Login user
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user and return JWT token
+      parameters:
+      - description: Register credentials
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.AuthResponse'
+      summary: Register a new user
+      tags:
+      - auth
+  /bookings:
+    post:
+      consumes:
+      - application/json
+      description: Book an event for the authenticated user
+      parameters:
+      - description: Booking details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBookingRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BookingResponse'
+      security:
+      - Bearer: []
+      summary: Create a booking
+      tags:
+      - bookings
+  /bookings/user:
+    get:
+      consumes:
+      - application/json
+      description: Get all bookings for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BookingResponse'
+            type: array
+      security:
+      - Bearer: []
+      summary: Get user bookings
+      tags:
+      - bookings
+  /events:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all events
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Event'
+            type: array
+      summary: Get all events
+      tags:
+      - events
+    post:
+      consumes:
+      - application/json
+      description: Create a new event (admin only)
+      parameters:
+      - description: Event details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateEventRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Event'
+      security:
+      - Bearer: []
+      summary: Create a new event
+      tags:
+      - events
+  /events/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing event (admin only)
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - Bearer: []
+      summary: Delete an event
+      tags:
+      - events
+    get:
+      consumes:
+      - application/json
+      description: Get details of a specific event
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+      summary: Get event by ID
+      tags:
+      - events
+    put:
+      consumes:
+      - application/json
+      description: Update an existing event (admin only)
+      parameters:
+      - description: Event ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Event details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateEventRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+      security:
+      - Bearer: []
+      summary: Update an event
+      tags:
+      - events
+  /tags:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all tags
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Tag'
+            type: array
+      summary: Get all tags
+      tags:
+      - tags
+    post:
+      consumes:
+      - application/json
+      description: Create a new tag (admin only)
+      parameters:
+      - description: Tag details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTagRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Tag'
+      security:
+      - Bearer: []
+      summary: Create a new tag
+      tags:
+      - tags
+  /tags/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing tag (admin only)
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      security:
+      - Bearer: []
+      summary: Delete a tag
+      tags:
+      - tags
+    get:
+      consumes:
+      - application/json
+      description: Get details of a specific tag
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      summary: Get tag by ID
+      tags:
+      - tags
+    put:
+      consumes:
+      - application/json
+      description: Update an existing tag (admin only)
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Tag details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateTagRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Tag'
+      security:
+      - Bearer: []
+      summary: Update a tag
+      tags:
+      - tags
+  /upload/image:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 'Upload an image file (max 3MB, formats: jpg, jpeg, png, gif)'
+      parameters:
+      - description: Image file
+        in: formData
+        name: image
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/upload.UploadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/upload.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/upload.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Upload an image
+      tags:
+      - upload
+securityDefinitions:
+  Bearer:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
