@@ -1,0 +1,1 @@
+import{a1 as u,f as i,j as t,a2 as o}from"./index-iG59JKom.js";const l=({children:r,requiredRole:a})=>{const s=u(),{isAuthenticated:n,user:e}=i(c=>c.auth);return n?a&&(e==null?void 0:e.role)!==a?t.jsx(o,{to:"/",replace:!0}):t.jsx(t.Fragment,{children:r}):t.jsx(o,{to:"/login",state:{from:s},replace:!0})};export{l as default};
