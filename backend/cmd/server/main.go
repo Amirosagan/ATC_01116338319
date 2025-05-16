@@ -70,7 +70,7 @@ func main() {
 
 	// Configure CORS
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"https://areeb.ddns.net", "http://areeb.ddns.net", "http://localhost:2025"}
+	config.AllowOrigins = []string{"https://areeb.ddns.net", "http://areeb.ddns.net", "https://areeb.ddns.net:2025", "http://areeb.ddns.net:2025"}
 	config.AllowCredentials = true
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
 	r.Use(cors.New(config))
