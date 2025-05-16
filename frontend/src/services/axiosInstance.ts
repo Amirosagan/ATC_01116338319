@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://areeb.ddns.net/api',
+  baseURL: 'https://areeb.ddns.net:2025/api',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -198,7 +198,7 @@ const api = {
           },
         });
 
-        const apiHost = "https://areeb.ddns.net";
+        const apiHost = "https://areeb.ddns.net:2025";
 
         return apiHost + data.imageUrl;
       } catch (error) {
