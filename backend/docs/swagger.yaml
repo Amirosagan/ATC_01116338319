@@ -168,7 +168,7 @@ definitions:
       imageUrl:
         type: string
     type: object
-host: localhost:8080
+host: areeb.ddns.net:2025
 info:
   contact:
     email: support@example.com
