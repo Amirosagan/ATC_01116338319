@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -41,6 +42,7 @@ import (
 func main() {
 	// Parse command line flags
 	seedAdmin := flag.Bool("seed-admin", false, "Seed admin user")
+	seedEvents := flag.Bool("seed-events", false, "Seed events data")
 	flag.Parse()
 
 	// Load environment variables
@@ -56,10 +58,18 @@ func main() {
 		if err := seed.SeedAdminUser(); err != nil {
 			log.Fatal("Failed to seed admin user:", err)
 		}
-		// Exit after seeding if that's the only operation requested
-		if flag.NFlag() == 1 {
-			return
+	}
+
+	// Seed events if flag is set
+	if *seedEvents {
+		if err := seed.SeedEvents(); err != nil {
+			log.Fatal("Failed to seed events:", err)
 		}
+	}
+
+	// Exit after seeding if that's the only operation requested
+	if flag.NFlag() > 0 && !strings.Contains(strings.Join(os.Args[1:], " "), "-port") {
+		return
 	}
 
 	// Initialize router
