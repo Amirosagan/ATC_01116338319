@@ -15,8 +15,6 @@
 /frontend/.env
 /frontend/.env.local
 /frontend/.env.*.local
-/frontend/dist/
-/frontend/dist-ssr/
 /frontend/coverage/
 /frontend/.vite/
 *.log
