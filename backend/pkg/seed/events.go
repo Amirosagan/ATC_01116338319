@@ -26,7 +26,7 @@ var techEvents = []struct {
 		Date:        time.Date(2025, time.April, 28, 9, 0, 0, 0, time.UTC),
 		Location:    "Moscone Center, San Francisco, CA",
 		Price:       2499.99,
-		Image:       "https://www.rsaconference.com/themes/custom/rsa/logo.svg",
+		Image:       "https://live.staticflickr.com/65535/54488513037_58956cbf05_c.jpg",
 	},
 	{
 		Name:        "AWS re:Invent 2024",
@@ -35,7 +35,7 @@ var techEvents = []struct {
 		Date:        time.Date(2024, time.December, 2, 9, 0, 0, 0, time.UTC),
 		Location:    "Las Vegas, Nevada",
 		Price:       1799.99,
-		Image:       "https://d1.awsstatic.com/events/reinvent/2024/AWS-re-Invent-2024-hero-banner.png",
+		Image:       "https://media.gettyimages.com/id/1245247600/photo/invent-2022.jpg?s=2048x2048&w=gi&k=20&c=Hh_S13DUI2pa44oh_HC0tFYGloVomuVDajB9ADI15NI=",
 	},
 	{
 		Name:        "CES 2025",
@@ -44,7 +44,7 @@ var techEvents = []struct {
 		Date:        time.Date(2025, time.January, 7, 10, 0, 0, 0, time.UTC),
 		Location:    "Las Vegas Convention Center, NV",
 		Price:       999.99,
-		Image:       "https://www.ces.tech/CES/media/CES-Rebrand/CES-Logo-Gradient.png",
+		Image:       "https://techcrunch.com/wp-content/uploads/2024/01/GettyImages-1246002029.jpg?resize=1200,800",
 	},
 	{
 		Name:        "Dublin Tech Summit 2025",
@@ -53,7 +53,7 @@ var techEvents = []struct {
 		Date:        time.Date(2025, time.May, 29, 9, 0, 0, 0, time.UTC),
 		Location:    "RDS, Dublin, Ireland",
 		Price:       599.99,
-		Image:       "https://dublintechsummit.com/wp-content/uploads/2024/01/DTS-Logo-2024.png",
+		Image:       "https://dublintechweek.com/wp-content/uploads/2024/12/DTS25-2.jpg",
 	},
 	{
 		Name:        "AI & Big Data Expo 2024",
@@ -62,7 +62,7 @@ var techEvents = []struct {
 		Date:        time.Date(2024, time.June, 5, 9, 0, 0, 0, time.UTC),
 		Location:    "Santa Clara Convention Center, CA",
 		Price:       899.99,
-		Image:       "https://www.ai-expo.net/northamerica/wp-content/uploads/2024/01/AI-Expo-NA-2024-Logo.png",
+		Image:       "https://www.ai-expo.net/wp-content/uploads/2023/07/The-Future-of-enterprise-technology-24-1024x682-1.webp",
 	},
 }
 
