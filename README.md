@@ -2,6 +2,46 @@
 
 A modern, full-stack application for managing online tasks, events, and bookings with user authentication.
 
+## Live URLs
+- Website: [https://areeb.ddns.net/](https://areeb.ddns.net/)
+- API Documentation (Swagger): [https://areeb.ddns.net:2025/swagger/index.html](https://areeb.ddns.net:2025/swagger/index.html)
+
+## Deployment Information
+
+### Infrastructure
+- Hosting: Azure VPS
+- Web Server: Nginx
+- SSL Certificate: Let's Encrypt
+- Architecture: Reverse Proxy Configuration
+
+### Deployment Setup
+
+The application is deployed on an Azure VPS with the following configuration:
+
+#### Nginx as Reverse Proxy
+Nginx is configured as a reverse proxy to handle:
+- Frontend application routing
+- API backend routing
+- SSL termination
+
+#### SSL Configuration
+- SSL certificates are managed through Let's Encrypt
+- Automatic certificate renewal is enabled
+- HTTPS is enforced for all connections
+
+#### Reverse Proxy Configuration
+The Nginx reverse proxy setup:
+- Routes frontend requests to the React application
+- Routes API requests to the backend service
+- Handles SSL termination for secure communications
+
+### Basic Architecture
+```
+Client Request → Nginx (SSL Termination) → 
+                  ├── Frontend (React App)
+                  └── Backend API (Port 2025)
+``` 
+
 ## 🏗️ Architecture Overview
 
 ### Tech Stack
