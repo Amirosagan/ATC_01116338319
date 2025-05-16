@@ -31,7 +31,7 @@ import (
 // @license.name  MIT
 // @license.url   https://opensource.org/licenses/MIT
 
-// @host      localhost:8080
+// @host      areeb.ddns.net:2025
 // @BasePath  /api
 
 // @securityDefinitions.apikey Bearer
@@ -70,7 +70,7 @@ func main() {
 
 	// Configure CORS
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5173"} // Vite default port
+	config.AllowOrigins = []string{"https://areeb.ddns.net", "http://areeb.ddns.net", "http://localhost:2025"}
 	config.AllowCredentials = true
 	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
 	r.Use(cors.New(config))

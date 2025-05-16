@@ -38,4 +38,4 @@ type CreateEventRequest struct {
 	Price       float64   `json:"price" binding:"required,min=0"`
 	Image       string    `json:"image" binding:"required"`
 	TagIDs      []string  `json:"tagIds,omitempty"`
-} 
+}
